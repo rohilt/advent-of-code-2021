@@ -1,5 +1,6 @@
 import System.IO
 
+type PreviousThreeDepths = (Int, Int, Int)
 main :: IO()
 main = do
   input <- readFile "in/day1"
@@ -19,6 +20,6 @@ countIncreasingDepths (previousDepth, count) currentDepth =
 part2 :: [Int] -> Int
 part2 = (\(_, c) -> c) . foldl countIncreasingDepthsBy3 ((0, 0, 0), -3)
 
-countIncreasingDepthsBy3 :: ((Int, Int, Int), Int) -> Int -> ((Int, Int, Int), Int)
+countIncreasingDepthsBy3 :: (PreviousThreeDepths, Int) -> Int -> (PreviousThreeDepths, Int)
 countIncreasingDepthsBy3 ((p1, p2, p3), count) c =
   ((p2, p3, c), if p1 < c then count + 1 else count)
