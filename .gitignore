@@ -1,0 +1,5 @@
+.COOKIE_KEY
+src/*.hi
+src/*.o
+out/
+in/
