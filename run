@@ -15,4 +15,4 @@ if [ $COMPILE_FAILED -eq 1 ]; then
 	exit 1
 fi
 
-./out/Day${DAY}
+time ./out/Day${DAY}
