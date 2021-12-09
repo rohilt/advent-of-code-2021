@@ -7,7 +7,7 @@ main = do
   print $ part2 $ parseInput input
 
 parseInput :: String -> [Int]
-parseInput input = map (\x -> read x :: Int) $ lines input
+parseInput = map (\x -> read x :: Int) . lines
 
 part1 :: [Int] -> Int
 part1 = (\(_, c) -> c) . foldl countIncreasingDepths (0, -1)
