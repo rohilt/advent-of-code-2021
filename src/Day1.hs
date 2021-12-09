@@ -17,4 +17,8 @@ countIncreasingDepths (previousDepth, count) currentDepth =
   (currentDepth, if previousDepth < currentDepth then count + 1 else count)
 
 part2 :: [Int] -> Int
-part2 _ = 0
+part2 = (\(_, c) -> c) . foldl countIncreasingDepthsBy3 ((0, 0, 0), -3)
+
+countIncreasingDepthsBy3 :: ((Int, Int, Int), Int) -> Int -> ((Int, Int, Int), Int)
+countIncreasingDepthsBy3 ((p1, p2, p3), count) c =
+  ((p2, p3, c), if p1 < c then count + 1 else count)
