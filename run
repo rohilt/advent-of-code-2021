@@ -2,17 +2,45 @@
 
 DAY=$1
 
-./fetch_input $DAY
-INPUT_FAILED=$?
-if [ $INPUT_FAILED -eq 1 ]; then
+if [ -z "$DAY" ]; then
+	echo "missing day parameter" 1>&2
+	exit 1
+elif [ ! "$DAY" -ge 1 ] || [ ! "$DAY" -le 25 ]; then
+	echo "invalid day parameter" 1>&2
+	exit 1
+fi
+# TODO make sure no decimals
+
+if [ ! -f .session ]; then
+	echo "missing session file" 1>&2
 	exit 1
 fi
 
+mkdir -p "in"
+
+if [ ! -f "in/day$DAY" ]; then
+	echo "retrieving input file for day $DAY"
+	curl -b $(cat .session) "https://adventofcode.com/2021/day/$DAY/input" --fail --silent > "in/day$DAY"
+	RETRIEVED_FILE=$?
+	if [ $RETRIEVED_FILE -ne 0 ]; then
+		echo "input file not yet available" 1>&2
+		[ -f "in/day$DAY" ] && rm "in/day$DAY"
+		exit 1
+	fi
+	echo "retrieved input file"
+else
+	echo "found input file for day $DAY"
+fi
+
 mkdir -p out
+
 ghc -o out/Day${DAY} src/Day${DAY}.hs src/Helper/*.hs
+
 COMPILE_FAILED=$?
 if [ $COMPILE_FAILED -eq 1 ]; then
 	exit 1
 fi
+
+echo
 
 time ./out/Day${DAY}
