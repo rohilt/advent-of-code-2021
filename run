@@ -9,7 +9,7 @@ if [ $INPUT_FAILED -eq 1 ]; then
 fi
 
 mkdir -p out
-ghc -o out/Day${DAY} src/Day${DAY}.hs
+ghc -o out/Day${DAY} src/Day${DAY}.hs src/Helper/*.hs
 COMPILE_FAILED=$?
 if [ $COMPILE_FAILED -eq 1 ]; then
 	exit 1

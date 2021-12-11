@@ -1,5 +1,7 @@
 .COOKIE_KEY
 src/*.hi
 src/*.o
+src/Helper/*.hi
+src/Helper/*.o
 out/
 in/
