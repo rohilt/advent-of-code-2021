@@ -11,6 +11,12 @@ This script requires one parameter, the day to run the code for.
 It automatically retrieves the input file if it is not already present, and it also warns if the input file is not yet available.
 It then runs the code for that specific problem, prints the output, and records how long it takes using the `time` command.
 
+### Example usage
+For example, to run the code for Day 2,
+```
+./run 2
+```
+
 ### Advent of Code session cookie
 Create a text file `.session` that contains your session cookie for Advent of Code.
 It should contain the following:
