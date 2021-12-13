@@ -26,4 +26,12 @@ median list
       middle2 = (-) (div (length list) 2) 1
 
 part2 :: [Int] -> Int
-part2 _ = 0
+part2 list = min (sum $ map (fuelCost align1) list) (sum $ map (fuelCost align2) list)
+  where
+    align = average list
+    align1 = floor align
+    align2 = ceiling align
+    fuelCost align position = div ((*) (abs (position - align)) ((+ 1) $ abs (position - align))) 2
+
+average :: [Int] -> Double
+average list = (fromIntegral $ sum list) / (fromIntegral $ length list)
